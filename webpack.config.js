@@ -6,12 +6,14 @@ const CopyPlugin = require('copy-webpack-plugin');
 // export
 module.exports = {
   // 파일을 읽어들이기 시작하는 진입점 설정
-  entry: './js/main.js', // parcel main.js 와 비슷함
+  entry: './src/main.ts', // parcel main.js 와 비슷함
+
+  devtool: 'inline-source-map',
 
   // 결과물(번들)을 반환하는 설정
   output: {
-    path: path.resolve(__dirname, 'dist'), // 기본값, 생략 가능
-    filename: 'main.js', // 기본값, 생략 가능
+    // path: path.resolve(__dirname, 'dist'), // 기본값, 생략 가능
+    // filename: 'main.js', // 기본값, 생략 가능
     clean: true, // 기존 내용 삭제
   },
 
@@ -27,7 +29,12 @@ module.exports = {
       },
       {
         test: /\.js$/, // js 확장자로 끝나는 파일
-        use: ['babel-loader'], // 파일을 babel-loader 로 읽어들여서 babel 이 적용될 수 있게 만들어줌
+        use: 'babel-loader', // 파일을 babel-loader 로 읽어들여서 babel 이 적용될 수 있게 만들어줌
+      },
+      {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
     ],
   },
@@ -44,5 +51,10 @@ module.exports = {
 
   devServer: {
     host: 'localhost',
+  },
+
+  // import 문에서 확장자 생략 가능
+  resolve: {
+    extensions: ['.ts', '.js'],
   },
 };
