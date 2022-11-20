@@ -131,13 +131,14 @@ body {
         display: flex;
         flex-direction: column;
         margin-top: 4vh;
-        overflow: scroll;
+        overflow-x: scroll;
         gap: 1vw;
         .todo-item {
           border: 1px solid $color-gray;
           display: flex;
           align-items: center;
           box-shadow: $box-shadow;
+          transition: all 1s ease;
           .order-handle {
             margin: 0 12px 0 18px;
             cursor: pointer;
@@ -146,7 +147,6 @@ body {
             margin-right: 10px;
           }
           .todo-input {
-            // width: 36vw;
             flex-grow: 1;
             padding: 14px;
             margin-right: 10px;
@@ -208,6 +208,7 @@ body {
     background-color: transparent;
     border: none;
     outline: none;
+    resize: none;
   }
 }
 
@@ -224,7 +225,7 @@ body {
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 42vh;
+  top: 44vh;
   left: 44vw;
   width: 10vw;
   padding: 20px;
@@ -261,7 +262,7 @@ body {
 $color-primary: rgb(190, 220, 255);
 $color-secondary: rgb(112, 188, 255);
 
-@keyframes palette {
+@keyframes loading {
   0% {
     color: $color-primary;
     -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
@@ -308,7 +309,7 @@ $color-secondary: rgb(112, 188, 255);
   }
 }
 
-.palette {
+.loading {
   position: absolute;
   top: 50vh;
   left: 50vw;
@@ -317,8 +318,11 @@ $color-secondary: rgb(112, 188, 255);
     display: block;
     height: 12px;
     width: 12px;
-    -webkit-animation: palette 2s infinite linear;
-    animation: palette 2s infinite linear;
+    -webkit-animation: loading 2s infinite linear;
+    animation: loading 2s infinite linear;
     border-radius: 100%;
+  }
+  &.active {
+    display: none;
   }
 }
