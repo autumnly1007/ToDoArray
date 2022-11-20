@@ -8,7 +8,7 @@ $color-black: #404040;
 $color-white: #fff;
 $color-gray: #dadce0;
 $color-lightgray: #eeeeee;
-$color-yellow: rgb(120, 170, 223);
+$color-skyblue: rgb(213, 233, 255);
 $box-shadow: 0 2px 6px 0 rgb(0 0 0 / 12%);
 
 body {
@@ -20,8 +20,17 @@ body {
   left: -2vw;
   bottom: 15vh;
   width: 25vw;
-  // height: 20vh;
   transform: rotate(150deg);
+  animation: moveLeft 3s ease;
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: rotate(150deg) translate(300px);
+  }
+  100% {
+    transform: rotate(150deg) translate(0, 0);
+  }
 }
 
 .container {
@@ -47,8 +56,9 @@ body {
       height: 80.4vh;
       background-color: $color-white;
       border-radius: 1vw;
+      padding-bottom: 5vh;
       display: flex;
-      // justify-content: center;
+      box-sizing: border-box;
       flex-direction: column;
       align-items: center;
       h1 {
@@ -56,34 +66,115 @@ body {
         font-weight: 600;
         margin-top: 4vh;
       }
-      .options {
-        width: 100%;
+      .sub-content {
+        width: 90%;
         display: flex;
-        justify-content: flex-end;
-        margin-right: 6vw;
         gap: 1vw;
         margin-top: 4vh;
+        .todo-add {
+          position: relative;
+          flex-grow: 1;
+          display: flex;
+          .add-input {
+            flex-grow: 1;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3vh;
+            outline: none;
+            background-color: $color-skyblue;
+            box-shadow: $box-shadow;
+          }
+          .add-btn {
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            &:hover {
+              transform: scale(1.2);
+            }
+            .material-symbols-outlined {
+              padding-top: 2px;
+            }
+          }
+        }
         select {
-          padding: 0.3vh 0.3vw;
-          border: 2px solid $color-gray;
-          border-radius: 1vh;
+          padding: 10px;
+          border-radius: 3vh;
+          border: none;
+          background-color: $color-lightgray;
           outline: none;
+          box-shadow: $box-shadow;
+          cursor: pointer;
+        }
+        .completed-delete-btn {
+          padding: 10px;
+          border-radius: 3vh;
+          background-color: $color-lightgray;
+          box-shadow: $box-shadow;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          &:hover {
+            transform: scale(1.2);
+          }
         }
       }
       .todos {
-        width: 85%;
-        border: 1px solid red;
-        padding: 2vw;
+        width: 90%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         margin-top: 4vh;
+        overflow: scroll;
         gap: 1vw;
         .todo-item {
-          border: 1px solid blue;
+          border: 1px solid $color-gray;
           display: flex;
+          align-items: center;
+          box-shadow: $box-shadow;
+          .order-handle {
+            margin: 0 12px 0 18px;
+            cursor: pointer;
+          }
+          .todo-check {
+            margin-right: 10px;
+          }
+          .todo-input {
+            // width: 36vw;
+            flex-grow: 1;
+            padding: 14px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+          }
           .date {
+            color: $color-black;
+            font-size: 12px;
+            margin-right: 6px;
             display: flex;
-            flex-direction: column;
+            gap: 20px;
+          }
+          .delete-btn {
+            cursor: pointer;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            padding: 0 16px 0 10px;
+            transition: all 0.2s ease;
+            &:hover {
+              transform: scale(1.2);
+            }
+            .material-symbols-outlined {
+              color: $color-black;
+              font-size: 22px;
+            }
           }
         }
       }
@@ -97,8 +188,137 @@ body {
   right: 2vw;
   width: 15vw;
   height: 28vh;
+  animation: moveRight 3s ease;
   img {
     width: 15vw;
     height: 28vh;
+  }
+  p {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+  }
+  .memo-txa {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12vw;
+    height: 15vh;
+    margin: 9vh 0 0 1.4vw;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translate(300px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.toast {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 42vh;
+  left: 44vw;
+  width: 10vw;
+  padding: 20px;
+  border: 1px solid $color-gray;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+  background-color: $color-skyblue;
+  z-index: 10;
+  animation: showAndHide 3s ease;
+  p {
+    font-size: 0.8vw;
+  }
+}
+
+@keyframes showAndHide {
+  0% {
+    display: none;
+  }
+  30% {
+    display: flex;
+  }
+  70% {
+    display: flex;
+  }
+  100% {
+    display: none;
+  }
+}
+
+/**
+  * Palette
+  * @author jh3y - jheytompkins.com
+*/
+$color-primary: rgb(190, 220, 255);
+$color-secondary: rgb(112, 188, 255);
+
+@keyframes palette {
+  0% {
+    color: $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
+      6.18034px -19.02113px 0 0 $color-primary;
+    box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
+      6.18034px -19.02113px 0 0 $color-primary;
+  }
+  20% {
+    color: $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-primary,
+      6.18034px -19.02113px 0 0 $color-secondary;
+    box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-primary,
+      6.18034px -19.02113px 0 0 $color-secondary;
+  }
+  40% {
+    color: $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary,
+      6.18034px -19.02113px 0 0 $color-primary;
+    box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary,
+      6.18034px -19.02113px 0 0 $color-primary;
+  }
+  60% {
+    color: $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
+      6.18034px -19.02113px 0 0 $color-secondary;
+    box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
+      6.18034px -19.02113px 0 0 $color-secondary;
+  }
+  80% {
+    color: $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary,
+      6.18034px -19.02113px 0 0 $color-primary;
+    box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary,
+      6.18034px -19.02113px 0 0 $color-primary;
+  }
+  100% {
+    color: $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
+      6.18034px -19.02113px 0 0 $color-primary;
+    box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
+      6.18034px -19.02113px 0 0 $color-primary;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.palette {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  &:before {
+    content: '';
+    display: block;
+    height: 12px;
+    width: 12px;
+    -webkit-animation: palette 2s infinite linear;
+    animation: palette 2s infinite linear;
+    border-radius: 100%;
   }
 }
