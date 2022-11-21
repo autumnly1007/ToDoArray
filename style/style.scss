@@ -111,7 +111,7 @@ body {
           box-shadow: $box-shadow;
           cursor: pointer;
         }
-        .completed-delete-btn {
+        .checked-delete-btn {
           padding: 10px;
           border-radius: 3vh;
           background-color: $color-lightgray;
@@ -223,6 +223,7 @@ body {
 
 .toast {
   display: flex;
+  opacity: 0;
   justify-content: center;
   position: absolute;
   top: 44vh;
@@ -234,24 +235,27 @@ body {
   box-shadow: $box-shadow;
   background-color: $color-skyblue;
   z-index: 10;
-  animation: showAndHide 3s ease;
-  p {
-    font-size: 0.8vw;
+  font-size: 0.8vw;
+  &.active {
+    animation: showAndHide 1.5s ease;
   }
 }
 
 @keyframes showAndHide {
   0% {
-    display: none;
+    opacity: 0;
   }
-  30% {
-    display: flex;
+  20% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
   }
   70% {
-    display: flex;
+    opacity: 0.8;
   }
   100% {
-    display: none;
+    opacity: 0;
   }
 }
 
@@ -313,6 +317,7 @@ $color-secondary: rgb(112, 188, 255);
   position: absolute;
   top: 50vh;
   left: 50vw;
+  display: none;
   &:before {
     content: '';
     display: block;
@@ -323,6 +328,6 @@ $color-secondary: rgb(112, 188, 255);
     border-radius: 100%;
   }
   &.active {
-    display: none;
+    display: block;
   }
 }

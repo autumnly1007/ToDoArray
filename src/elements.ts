@@ -1,3 +1,6 @@
+import { Todo } from './requests';
+import { formatDate } from './utils';
+
 export const elementMain = () : string => {
   return `
   <img class="apple-pencil" src="/images/apple-pencil.png" alt="apple-pencil" />
@@ -21,7 +24,7 @@ export const elementMain = () : string => {
               <option value="">Recent Order</option>
               <option value="">Old Order</option>
             </select>
-            <button class="completed-delete-btn"><span class="material-symbols-outlined">check </span><span class="material-symbols-outlined">delete </span></button>
+            <button class="checked-delete-btn"><span class="material-symbols-outlined">check </span><span class="material-symbols-outlined">delete </span></button>
           </div>
           <div class="todos">
           </div>
@@ -44,18 +47,10 @@ export const elementTodo = (data: Todo): string => {
       <input class="todo-check" type="checkbox" ${data.done ? "checked" : ''}/>
       <input class="todo-input" type="text" value="${data.title}"/>
       <div class="date">
-        <span class="insert-date">Add : ${data.createdAt.slice(0, 10).replace(/-/gi, ".")}</span>
-        <span class="update-date">Update : ${data.updatedAt.slice(0, 10).replace(/-/gi, ".")}</span>
+        <span class="insert-date">Add : ${formatDate(data.createdAt)}</span>
+        <span class="update-date">Update : ${formatDate(data.updatedAt)}</span>
       </div>
       <button class="delete-btn"><span class="material-symbols-outlined"> delete </span></button>
     </div>`;
 }
 
-type Todo = {
-  id: string // 할 일 ID
-  order: number // 할 일 순서
-  title: string // 할 일 제목
-  done: boolean // 할 일 완료 여부
-  createdAt: string // 할 일 생성일
-  updatedAt: string // 할 일 수정일
-}

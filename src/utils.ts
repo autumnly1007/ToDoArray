@@ -1,13 +1,20 @@
-export const render = (html: string, target: string) => {
-  showElement('.loading');
+export const render = (html: string, target: string, callback?: Function) => {
   document.querySelector(target).innerHTML += html;
-  hideElement('.loading');
+  if (callback) callback();
+};
+
+export const setElemenHtml = (target: string, text: string = '') => {
+  document.querySelector(target).innerHTML = text;
 };
 
 export const showElement = (target: string) => {
-  if(document.querySelector(target)) document.querySelector(target).classList.add('active');
+  document.querySelector(target).classList.add('active');
 };
 
 export const hideElement = (target: string) => {
-  if(document.querySelector(target)) document.querySelector(target).classList.remove('active');
+  document.querySelector(target).classList.remove('active');
+};
+
+export const formatDate = (target: string): string => {
+  return target.slice(0, 10).replace(/-/gi, ".");
 };
