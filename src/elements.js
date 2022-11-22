@@ -1,7 +1,7 @@
 import { Todo } from './requests';
 import { formatDate } from './utils';
 
-export const elementMain = () : string => {
+export const elementMain = () => {
   return `
   <img class="apple-pencil" src="/images/apple-pencil.png" alt="apple-pencil" />
     <div class="container">
@@ -40,11 +40,11 @@ export const elementMain = () : string => {
     <div class="loading"></div>`;
 };
 
-export const elementTodo = (data: Todo): string => {
+export const elementTodo = (data) => {
   return `
     <div class="todo-item" data-id="${data.id}">${data.order}
       <span class="order-handle">:::</span>
-      <input class="todo-check" type="checkbox" ${data.done ? "checked" : ''}/>
+      <input class="todo-check" type="checkbox" ${data.done ? 'checked' : ''}/>
       <input class="todo-input" type="text" value="${data.title}"/>
       <div class="date">
         <span class="insert-date">Add : ${formatDate(data.createdAt)}</span>
@@ -52,5 +52,4 @@ export const elementTodo = (data: Todo): string => {
       </div>
       <button class="delete-btn"><span class="material-symbols-outlined"> delete </span></button>
     </div>`;
-}
-
+};

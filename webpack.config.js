@@ -6,7 +6,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 // export
 module.exports = {
   // 파일을 읽어들이기 시작하는 진입점 설정
-  entry: './src/main.ts', // parcel main.js 와 비슷함
+  //entry: './src/main.ts', // parcel main.js 와 비슷함
+  entry: './src/main.js', // parcel main.js 와 비슷함
 
   devtool: 'inline-source-map',
 

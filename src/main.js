@@ -17,7 +17,7 @@ function addEventAdd() {
   // 투두 추가 버튼 클릭 이벤트
   document.querySelector('.add-btn').addEventListener('click', () => {
     showElement('.loading');
-    insertTodo((<HTMLInputElement>document.querySelector('.add-input')).value).then(() => {
+    insertTodo(document.querySelector('.add-input').value).then(() => {
       renderTodoList();
       hideElement('.loading');
       toggleToast('추가가 완료되었습니다.');
@@ -25,8 +25,8 @@ function addEventAdd() {
   });
 
   // 투두 추가 input 엔터키 이벤트
-  document.querySelector('.add-input').addEventListener('keyup', (event: KeyboardEvent) => {
-    if (event.keyCode === 13) (<HTMLInputElement>document.querySelector('.add-btn')).click();
+  document.querySelector('.add-input').addEventListener('keyup', (event) => {
+    if (event.keyCode === 13) document.querySelector('.add-btn').click();
   });
 }
 
@@ -35,11 +35,11 @@ function addEventTodo() {
 
   // 투두 checkbox 체크 시 할 일 수정
 
-  // 투두 input 포커스 아웃 시 할 일 수정
-  document.querySelectorAll('.todo-input').forEach((item: Element) => {
-    item.addEventListener('focusout', () => {
+  // 투두 input blur 시 할 일 수정
+  document.querySelectorAll('.todo-input').forEach((item) => {
+    item.addEventListener('blur', () => {
       showElement('.loading');
-      console.log('투두 input 포커스 아웃 시 할 일 수정')
+      console.log('투두 input 포커스 아웃 시 할 일 수정');
       // 데이터 수정
       // 데이터 목록 조회
       renderTodoList();
@@ -57,7 +57,7 @@ function addEventTodo() {
   });
 
   // 삭제 버튼 클릭 이벤트
-  document.querySelectorAll('.delete-btn').forEach((item: Element) => {
+  document.querySelectorAll('.delete-btn').forEach((item) => {
     const dataId = item.parentElement.getAttribute('data-id');
     item.addEventListener('click', () => {
       showElement('.loading');
@@ -75,14 +75,18 @@ function renderTodoList() {
     setElemenHtml('.todos');
     res.forEach((item) => {
       render(elementTodo(item), '.todos', addEventTodo);
-    })
+    });
   });
 }
 
-function toggleToast(text: string) {
+function toggleToast(text) {
   setElemenHtml('.toast', text);
   showElement('.toast');
-  document.querySelector('.toast').addEventListener('animationend', () => {
-    hideElement('.toast');
-  }, false);
+  document.querySelector('.toast').addEventListener(
+    'animationend',
+    () => {
+      hideElement('.toast');
+    },
+    false
+  );
 }
