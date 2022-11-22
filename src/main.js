@@ -1,92 +1,48 @@
 import '../style/style.scss';
-import { elementMain, elementTodo } from './elements';
-import { deleteTodo, insertTodo, selectListTodo } from './requests';
-import { render, showElement, hideElement, setElemenHtml } from './utils';
+import { renderTodoList } from './renderTodo';
+import { insertTodo } from './requests';
+import { showElement, hideElement, showToast, setElemenValue } from './setElements';
 
-// Main 렌더링
-render(elementMain(), '.root', addEventAdd);
-
+// TODO 목록 조회
 showElement('.loading');
 setTimeout(() => {
-  // 데이터 목록 조회
   renderTodoList();
   hideElement('.loading');
 }, 1000);
 
-function addEventAdd() {
-  // 투두 추가 버튼 클릭 이벤트
-  document.querySelector('.add-btn').addEventListener('click', () => {
-    showElement('.loading');
-    insertTodo(document.querySelector('.add-input').value).then(() => {
+// TODO 추가 버튼 클릭 이벤트
+document.querySelector('.add-btn').addEventListener('click', (event) => {
+  const title = document.querySelector('.add-input').value.trim();
+  if (title.length === 0) {
+    alert('할 일을 입력해 주세요.');
+    return;
+  }
+  showElement('.loading');
+  const order = 0;
+  insertTodo(title, order).then((res) => {
+    if (res) {
       renderTodoList();
       hideElement('.loading');
-      toggleToast('추가가 완료되었습니다.');
-    });
-  });
-
-  // 투두 추가 input 엔터키 이벤트
-  document.querySelector('.add-input').addEventListener('keyup', (event) => {
-    if (event.keyCode === 13) document.querySelector('.add-btn').click();
-  });
-}
-
-function addEventTodo() {
-  // 투두 순서 수정
-
-  // 투두 checkbox 체크 시 할 일 수정
-
-  // 투두 input blur 시 할 일 수정
-  document.querySelectorAll('.todo-input').forEach((item) => {
-    item.addEventListener('blur', () => {
-      showElement('.loading');
-      console.log('투두 input 포커스 아웃 시 할 일 수정');
-      // 데이터 수정
-      // 데이터 목록 조회
-      renderTodoList();
+      setElemenValue('.add-input');
+      showToast('추가가 완료되었습니다.');
+    } else {
       hideElement('.loading');
-      toggleToast('수정이 완료되었습니다.');
-    });
+      showToast();
+    }
   });
+});
 
-  // 체크 삭제 버튼 클릭 이벤트
-  document.querySelector('.checked-delete-btn').addEventListener('click', () => {
-    console.log('체크 삭제 버튼 클릭 이벤트');
-    // 체크된 데이터 삭제
-    // 데이터 목록 조회
-    renderTodoList();
-  });
+// TODO 추가 input 엔터키 이벤트
+document.querySelector('.add-input').addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && !event.isComposing) {
+    document.querySelector('.add-btn').click();
+  }
+});
 
-  // 삭제 버튼 클릭 이벤트
-  document.querySelectorAll('.delete-btn').forEach((item) => {
-    const dataId = item.parentElement.getAttribute('data-id');
-    item.addEventListener('click', () => {
-      showElement('.loading');
-      deleteTodo(dataId).then(() => {
-        renderTodoList();
-        hideElement('.loading');
-        toggleToast('삭제가 완료되었습니다.');
-      });
-    });
-  });
-}
-
-function renderTodoList() {
-  selectListTodo().then((res) => {
-    setElemenHtml('.todos');
-    res.forEach((item) => {
-      render(elementTodo(item), '.todos', addEventTodo);
-    });
-  });
-}
-
-function toggleToast(text) {
-  setElemenHtml('.toast', text);
-  showElement('.toast');
-  document.querySelector('.toast').addEventListener(
-    'animationend',
-    () => {
-      hideElement('.toast');
-    },
-    false
-  );
-}
+// 체크된 TODO 삭제 버튼 클릭 이벤트
+document.querySelector('.checked-delete-btn').addEventListener('click', () => {
+  if (!confirm('완료된 할 일을 모두 삭제하시겠어요?')) return;
+  // 체크된 데이터 삭제
+  // TODO 목록 조회
+  renderTodoList();
+});

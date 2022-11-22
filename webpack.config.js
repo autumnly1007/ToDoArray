@@ -6,7 +6,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 // export
 module.exports = {
   // 파일을 읽어들이기 시작하는 진입점 설정
-  //entry: './src/main.ts', // parcel main.js 와 비슷함
+  //entry: './src/main.ts', // 추후 사용 예정
   entry: './src/main.js', // parcel main.js 와 비슷함
 
   devtool: 'inline-source-map',
@@ -57,5 +57,15 @@ module.exports = {
   // import 문에서 확장자 생략 가능
   resolve: {
     extensions: ['.ts', '.js'],
+    fallback: {
+      url: require.resolve('url'),
+      fs: false,
+      crypto: require.resolve('crypto-browserify'),
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      os: require.resolve('os-browserify/browser'),
+      stream: require.resolve('stream-browserify'),
+      path: require.resolve('path-browserify'),
+    },
   },
 };
