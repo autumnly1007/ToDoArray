@@ -1,2 +1,3 @@
 # ToDoArray
-typescript 를 이용한 todo list
+
+API 를 이용한 todo list (typescript 로 변경 예정)
