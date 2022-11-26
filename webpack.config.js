@@ -57,15 +57,5 @@ module.exports = {
   // import 문에서 확장자 생략 가능
   resolve: {
     extensions: ['.ts', '.js'],
-    fallback: {
-      url: require.resolve('url'),
-      fs: false,
-      crypto: require.resolve('crypto-browserify'),
-      http: require.resolve('stream-http'),
-      https: require.resolve('https-browserify'),
-      os: require.resolve('os-browserify/browser'),
-      stream: require.resolve('stream-browserify'),
-      path: require.resolve('path-browserify'),
-    },
   },
 };
