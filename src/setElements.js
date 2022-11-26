@@ -15,7 +15,13 @@ export const hideElement = (target) => {
 };
 
 export const formatDate = (target) => {
-  return target.slice(0, 10).replace(/-/gi, '.');
+  const date = new Date(target);
+  const year = String(date.getFullYear()).padStart(2, 0);
+  const month = String(date.getMonth()).padStart(2, 0);
+  const today = String(date.getDay()).padStart(2, 0);
+  const hour = String(date.getHours()).padStart(2, 0);
+  const min = String(date.getMinutes()).padStart(2, 0);
+  return `${year}.${month}.${today} | ${hour}:${min}`;
 };
 
 // 토스트 메시지 출력
