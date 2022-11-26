@@ -9,61 +9,63 @@ const HEADER = {
 };
 
 function createRequest(type, data) {
-  if (data) {
-    return {
-      method: type,
-      headers: HEADER,
-      body: JSON.stringify(data),
-    };
-  } else {
-    return {
-      method: type,
-      headers: HEADER,
-    };
-  }
+  const request = { method: type, headers: HEADER };
+  if (data) request.body = JSON.stringify(data);
+  return request;
 }
 
 export async function selectListTodo() {
-  const res = await fetch(API_URL, createRequest('GET'));
   try {
+    const res = await fetch(API_URL, createRequest('GET'));
     return await res.json();
-  } catch (e) {
+  } catch {
     return false;
   }
 }
 
 export async function insertTodo(title, order) {
-  const res = await fetch(API_URL, createRequest('POST', { title, order }));
   try {
-    return await res.json();
-  } catch (e) {
+    await fetch(API_URL, createRequest('POST', { title, order }));
+    return true;
+  } catch {
     return false;
   }
 }
 
-export async function updateTodo(id, title, done, order) {
-  const res = await fetch(API_URL + `/${id}`, createRequest('PUT', { title, done, order }));
+export async function updateTodo({ id, title, done, order }) {
   try {
-    return await res.json();
-  } catch (e) {
+    const res = await fetch(API_URL + `/${id}`, createRequest('PUT', { title, done, order }));
+    return true;
+  } catch {
     return false;
   }
 }
 
 export async function deleteTodo(id) {
-  const res = await fetch(API_URL + `/${id}`, createRequest('DELETE'));
   try {
-    return await res.json();
-  } catch (e) {
+    await fetch(API_URL + `/${id}`, createRequest('DELETE'));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export async function deleteListTodo(ids) {
+  try {
+    for (let id of ids) {
+      await fetch(API_URL + `/${id}`, createRequest('DELETE'));
+    }
+    return true;
+  } catch {
     return false;
   }
 }
 
 export async function reorderTodo(todoIds) {
-  const res = await fetch(API_URL, createRequest('PUT', { todoIds }));
   try {
-    return await res.json();
-  } catch (e) {
+    await fetch(API_URL, createRequest('PUT', { todoIds }));
+    return true;
+  } catch {
     return false;
   }
 }
