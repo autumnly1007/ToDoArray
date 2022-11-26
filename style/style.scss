@@ -4,6 +4,9 @@
 // google icon
 @import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200';
 
+// google fonts
+@import 'https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap';
+
 $color-black: #404040;
 $color-white: #fff;
 $color-gray: #dadce0;
@@ -12,6 +15,7 @@ $color-skyblue: rgb(213, 233, 255);
 $box-shadow: 0 2px 6px 0 rgb(0 0 0 / 12%);
 
 body {
+  font-family: 'Roboto', sans-serif;
   overflow: hidden;
 }
 
@@ -63,6 +67,7 @@ body {
       flex-direction: column;
       align-items: center;
       h1 {
+        font-family: 'Roboto Mono';
         font-size: 1.6vw;
         font-weight: 600;
         margin-top: 4vh;
@@ -132,7 +137,8 @@ body {
         display: flex;
         flex-direction: column;
         margin-top: 4vh;
-        overflow-x: scroll;
+        overflow-x: hidden;
+        overflow-y: scroll;
         gap: 1vw;
         .todo-item {
           border: 1px solid $color-gray;
@@ -183,6 +189,7 @@ body {
 }
 
 .post-it {
+  font-family: 'Roboto Mono';
   position: absolute;
   top: 5vh;
   right: 2vw;
@@ -269,45 +276,33 @@ $color-secondary: rgb(112, 188, 255);
 @keyframes loading {
   0% {
     color: $color-primary;
-    -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
-      6.18034px -19.02113px 0 0 $color-primary;
-    box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
-      6.18034px -19.02113px 0 0 $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary, 6.18034px -19.02113px 0 0 $color-primary;
+    box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary, 6.18034px -19.02113px 0 0 $color-primary;
   }
   20% {
     color: $color-primary;
-    -webkit-box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-primary,
-      6.18034px -19.02113px 0 0 $color-secondary;
-    box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-primary,
-      6.18034px -19.02113px 0 0 $color-secondary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-primary, 6.18034px -19.02113px 0 0 $color-secondary;
+    box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-primary, 6.18034px -19.02113px 0 0 $color-secondary;
   }
   40% {
     color: $color-primary;
-    -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary,
-      6.18034px -19.02113px 0 0 $color-primary;
-    box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary,
-      6.18034px -19.02113px 0 0 $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary, 6.18034px -19.02113px 0 0 $color-primary;
+    box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary, 6.18034px -19.02113px 0 0 $color-primary;
   }
   60% {
     color: $color-primary;
-    -webkit-box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
-      6.18034px -19.02113px 0 0 $color-secondary;
-    box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
-      6.18034px -19.02113px 0 0 $color-secondary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary, 6.18034px -19.02113px 0 0 $color-secondary;
+    box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary, 6.18034px -19.02113px 0 0 $color-secondary;
   }
   80% {
     color: $color-primary;
-    -webkit-box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary,
-      6.18034px -19.02113px 0 0 $color-primary;
-    box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary,
-      6.18034px -19.02113px 0 0 $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary, 6.18034px -19.02113px 0 0 $color-primary;
+    box-shadow: 20px 0px 0 0 $color-primary, 6.18034px 19.02113px 0 0 $color-secondary, -16.18034px 11.75571px 0 0 $color-primary, -16.18034px -11.75571px 0 0 $color-secondary, 6.18034px -19.02113px 0 0 $color-primary;
   }
   100% {
     color: $color-primary;
-    -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
-      6.18034px -19.02113px 0 0 $color-primary;
-    box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary,
-      6.18034px -19.02113px 0 0 $color-primary;
+    -webkit-box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary, 6.18034px -19.02113px 0 0 $color-primary;
+    box-shadow: 20px 0px 0 0 $color-secondary, 6.18034px 19.02113px 0 0 $color-primary, -16.18034px 11.75571px 0 0 $color-secondary, -16.18034px -11.75571px 0 0 $color-primary, 6.18034px -19.02113px 0 0 $color-primary;
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
