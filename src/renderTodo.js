@@ -40,50 +40,24 @@ const renderTodo = (data) => {
 
   // TODO 완료 여부 수정
   checkboxEl.addEventListener('change', () => {
-    showElement('.loading');
-    updateTodo(data.id, inputEl.value, checkboxEl.checked, todoItemEl.dataset.order).then((res) => {
-      if (res) {
-        // 데이터 목록 조회
-        renderTodoList();
-        hideElement('.loading');
-        showToast('수정이 완료되었습니다.');
-      } else {
-        hideElement('.loading');
-        showToast();
-      }
-    });
+    const id = data.id;
+    const title = inputEl.value;
+    const done = checkboxEl.checked;
+    const order = todoItemEl.dataset.order;
+    fnUpdateTodo({ id, title, done, order });
   });
 
   // TODO 수정
   inputEl.addEventListener('change', () => {
-    showElement('.loading');
-    updateTodo(data.id, inputEl.value, checkboxEl.checked, todoItemEl.dataset.order).then((res) => {
-      if (res) {
-        // 데이터 목록 조회
-        renderTodoList();
-        hideElement('.loading');
-        showToast('수정이 완료되었습니다.');
-      } else {
-        hideElement('.loading');
-        showToast();
-      }
-    });
+    const id = data.id;
+    const title = inputEl.value;
+    const done = checkboxEl.checked;
+    const order = todoItemEl.dataset.order;
+    fnUpdateTodo({ id, title, done, order });
   });
 
   // TODO 삭제
-  deleteBtnEl.addEventListener('click', () => {
-    showElement('.loading');
-    deleteTodo(data.id).then((res) => {
-      if (res) {
-        renderTodoList();
-        hideElement('.loading');
-        showToast('삭제가 완료되었습니다.');
-      } else {
-        hideElement('.loading');
-        showToast();
-      }
-    });
-  });
+  deleteBtnEl.addEventListener('click', () => fnDeleteTodo(data.id));
 
   // TODO 순서 변경
 
@@ -93,14 +67,41 @@ const renderTodo = (data) => {
 
 // TODO 목록 렌더링
 export function renderTodoList() {
-  selectListTodo().then((res) => {
+  return new Promise(async (resolve, reject) => {
+    const res = await selectListTodo();
     if (!res) {
       hideElement('.loading');
       showToast();
-      return false;
+      reject(false);
     }
     setElemenHtml('.todos');
     res.forEach((item) => renderTodo(item));
-    return true;
+    resolve(true);
   });
+}
+
+async function fnUpdateTodo(obj) {
+  showElement('.loading');
+  const res = await updateTodo(obj);
+  if (!res) {
+    hideElement('.loading');
+    showToast();
+    return;
+  }
+  renderTodoList();
+  hideElement('.loading');
+  showToast('수정이 완료되었습니다.');
+}
+
+async function fnDeleteTodo(id) {
+  showElement('.loading');
+  const res = await deleteTodo(data.id);
+  if (!res) {
+    hideElement('.loading');
+    showToast();
+    return;
+  }
+  renderTodoList();
+  hideElement('.loading');
+  showToast('삭제가 완료되었습니다.');
 }
