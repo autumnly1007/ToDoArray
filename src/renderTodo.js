@@ -81,6 +81,7 @@ export async function renderTodoList(done, order) {
   else if (done === 'false') res = res.filter((item) => item.done === false);
 
   curOrder = res.length;
+  setElementHtml('.todo-length', curOrder);
   setElementHtml('.todos');
   if (res.length === 0) showToast('등록된 할 일이 없습니다.');
   else res.forEach((item) => renderTodo(item));
