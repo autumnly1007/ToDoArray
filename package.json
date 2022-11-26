@@ -40,5 +40,8 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "dependencies": {
+    "sortablejs": "^1.15.0"
+  }
 }

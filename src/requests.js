@@ -1,3 +1,5 @@
+import { showToast } from './setElements';
+
 const API_URL = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/todos`;
 const API_KEY = `FcKdtJs202209`;
 const USER_NAME = `KDT3_AhnGaEul`;
@@ -19,34 +21,35 @@ export async function selectListTodo() {
     const res = await fetch(API_URL, createRequest('GET'));
     return await res.json();
   } catch {
-    return false;
+    showToast();
+    throw new Error('데이터 조회에 실패하였습니다.');
   }
 }
 
 export async function insertTodo(title, order) {
   try {
     await fetch(API_URL, createRequest('POST', { title, order }));
-    return true;
   } catch {
-    return false;
+    showToast();
+    throw new Error('데이터 추가에 실패하였습니다.');
   }
 }
 
 export async function updateTodo({ id, title, done, order }) {
   try {
     const res = await fetch(API_URL + `/${id}`, createRequest('PUT', { title, done, order }));
-    return true;
   } catch {
-    return false;
+    showToast();
+    throw new Error('데이터 수정에 실패하였습니다.');
   }
 }
 
 export async function deleteTodo(id) {
   try {
     await fetch(API_URL + `/${id}`, createRequest('DELETE'));
-    return true;
   } catch {
-    return false;
+    showToast();
+    throw new Error('데이터 삭제에 실패하였습니다.');
   }
 }
 
@@ -55,17 +58,17 @@ export async function deleteListTodo(ids) {
     for (let id of ids) {
       await fetch(API_URL + `/${id}`, createRequest('DELETE'));
     }
-    return true;
   } catch {
-    return false;
+    showToast();
+    throw new Error('데이터 삭제에 실패하였습니다.');
   }
 }
 
 export async function reorderTodo(todoIds) {
   try {
-    await fetch(API_URL, createRequest('PUT', { todoIds }));
-    return true;
+    await fetch(API_URL + `/reorder`, createRequest('PUT', { todoIds }));
   } catch {
-    return false;
+    showToast();
+    throw new Error('데이터 정렬에 실패하였습니다.');
   }
 }
