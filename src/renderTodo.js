@@ -29,10 +29,10 @@ const renderTodo = (data) => {
   dateEl.className = 'date';
   const insertDateEl = document.createElement('span');
   insertDateEl.className = 'insert-date';
-  insertDateEl.innerHTML = `Update : ${formatDate(data.createdAt)}`;
+  insertDateEl.innerHTML = `Add : ${formatDate(data.createdAt)}`;
   const updateDateEl = document.createElement('span');
   updateDateEl.className = 'update-date';
-  updateDateEl.innerHTML = `Add : ${formatDate(data.updatedAt)}`;
+  updateDateEl.innerHTML = `Update : ${formatDate(data.updatedAt)}`;
   dateEl.append(insertDateEl, updateDateEl);
 
   const deleteBtnEl = document.createElement('button');
